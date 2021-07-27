@@ -10,6 +10,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>event-reader</module>
+        <module>integrator-core</module>
     </modules>
 
     <properties>
@@ -19,7 +20,7 @@
         <camel-version>3.10.0</camel-version>
     </properties>
 
-<!--    <dependencyManagement>-->
+<!--        <dependencyManagement>-->
 <!--        <dependencies>-->
 <!--            &lt;!&ndash; Spring Boot BOM &ndash;&gt;-->
 <!--            <dependency>-->

@@ -4,8 +4,8 @@ reader:
   thread-count: 1
 scheduler1:
   url: "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson"
-  delay-millis: "5000"
-  thread-count: 100
+  delay-millis: "2000"
+  thread-count: 1
 scheduler2:
   delay-millis: "1000"
   thread-count: 1
