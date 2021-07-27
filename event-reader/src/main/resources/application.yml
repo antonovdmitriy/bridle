@@ -2,6 +2,13 @@ reader:
   url: "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson"
   delay-millis: "60000"
   thread-count: 1
+scheduler1:
+  url: "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson"
+  delay-millis: "5000"
+  thread-count: 100
+scheduler2:
+  delay-millis: "1000"
+  thread-count: 1
 kafka-out:
   topic: "test"
   brokers: "192.168.100.100:9091,192.168.100.100:9092,192.168.100.100:9093"
