@@ -1,7 +1,9 @@
 package com.antonov.integrator.configuration;
 
-import com.antonov.integrator.components.sheduler.SchedulerBuilder;
-import com.antonov.integrator.components.sheduler.SimpleSchedulerBuilder;
+import com.antonov.integrator.components.EndpointConsumerBuilderFactory;
+import com.antonov.integrator.components.EndpointProducerBuilderFactory;
+import com.antonov.integrator.components.http.SimpleHttpOutEndpointConsumerBuilderFactory;
+import com.antonov.integrator.components.sheduler.SimpleSchedulerEndpointConsumerBuilderFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,7 +16,12 @@ public class IntegratorConfiguration {
     private Environment environment;
 
     @Bean
-    SchedulerBuilder schedulerBuilder() {
-        return new SimpleSchedulerBuilder(environment);
+    EndpointConsumerBuilderFactory schedulerFactory() {
+        return new SimpleSchedulerEndpointConsumerBuilderFactory(environment);
+    }
+
+    @Bean
+    EndpointProducerBuilderFactory httpOutFactory() {
+        return new SimpleHttpOutEndpointConsumerBuilderFactory(environment);
     }
 }

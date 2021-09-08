@@ -16,26 +16,27 @@
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
-        <spring-boot-version>2.5.1</spring-boot-version>
-        <camel-version>3.10.0</camel-version>
+        <spring-boot-version>2.5.3</spring-boot-version>
+        <camel-version>3.11.1</camel-version>
     </properties>
 
-<!--        <dependencyManagement>-->
-<!--        <dependencies>-->
-<!--            &lt;!&ndash; Spring Boot BOM &ndash;&gt;-->
-<!--            <dependency>-->
-<!--                <groupId>org.springframework.boot</groupId>-->
-<!--                <artifactId>spring-boot-dependencies</artifactId>-->
-<!--                <version>${spring-boot-version}</version>-->
-<!--                <type>pom</type>-->
-<!--            </dependency>-->
-<!--            <dependency>-->
-<!--                <groupId>org.apache.camel.springboot</groupId>-->
-<!--                <artifactId>camel-spring-boot-dependencies</artifactId>-->
-<!--                <version>3.10.0</version>-->
-<!--                <type>pom</type>-->
-<!--            </dependency>-->
-<!--        </dependencies>-->
-<!--    </dependencyManagement>-->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot-version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.camel.springboot</groupId>
+                <artifactId>camel-spring-boot-dependencies</artifactId>
+                <version>${camel-version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
 </project>

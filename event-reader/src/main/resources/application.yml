@@ -1,13 +1,10 @@
-reader:
-  url: "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson"
+httpOut:
+  url: "earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson"
+scheduler1:
   delay-millis: "60000"
   thread-count: 1
-scheduler1:
-  url: "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson"
-  delay-millis: "2000"
-  thread-count: 1
 scheduler2:
-  delay-millis: "1000"
+  delay-millis: "10"
   thread-count: 1
 kafka-out:
   topic: "test"
