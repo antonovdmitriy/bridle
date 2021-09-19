@@ -16,8 +16,8 @@ public class ReaderRoute extends RouteBuilder {
 
     @Override
     public void configure() {
-        from(schedulerFactory.create("scheduler1"))
-                .to(httpOutFactory.create("httpOut"))
+        from(schedulerFactory.create())
+                .to(httpOutFactory.create())
 //                .process(exchange -> exchange.getIn().setBody("first"))
                 .convertBodyTo(String.class)
 ////                .split(body().tokenize("\n"))
