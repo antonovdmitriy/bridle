@@ -1,4 +1,4 @@
-package com.antonov.integrator.components;
+package com.bridle.core.components;
 
 import org.apache.camel.builder.EndpointProducerBuilder;
 

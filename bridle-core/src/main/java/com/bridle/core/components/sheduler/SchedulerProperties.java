@@ -1,4 +1,4 @@
-package com.antonov.integrator.components.sheduler;
+package com.bridle.core.components.sheduler;
 
 import javax.validation.constraints.Positive;
 

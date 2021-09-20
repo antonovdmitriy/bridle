@@ -1,4 +1,4 @@
-package com.antonov.integrator.components.http;
+package com.bridle.core.components.http;
 
 import javax.validation.constraints.NotEmpty;
 
