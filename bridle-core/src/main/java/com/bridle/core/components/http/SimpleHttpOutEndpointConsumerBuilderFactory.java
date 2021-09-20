@@ -11,8 +11,6 @@ import static org.apache.camel.builder.endpoint.StaticEndpointBuilders.http;
 public class SimpleHttpOutEndpointConsumerBuilderFactory implements EndpointProducerBuilderFactory {
 
     public static final String DEFAULT_CONFIG_PROPERTIES_KEY_HTTP_OUT = "http-out";
-    private Binder configurationBinder;
-    private ApplicationContext context;
     private PropertiesLoader loader;
 
     public SimpleHttpOutEndpointConsumerBuilderFactory(PropertiesLoader loader) {
