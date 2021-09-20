@@ -6,6 +6,9 @@ import org.apache.camel.builder.EndpointProducerBuilder;
 import org.springframework.boot.context.properties.bind.Binder;
 import org.springframework.context.ApplicationContext;
 
+import java.util.Map;
+import java.util.function.Consumer;
+
 import static org.apache.camel.builder.endpoint.StaticEndpointBuilders.http;
 
 public class SimpleHttpOutEndpointConsumerBuilderFactory implements EndpointProducerBuilderFactory {
@@ -20,7 +23,9 @@ public class SimpleHttpOutEndpointConsumerBuilderFactory implements EndpointProd
     @Override
     public EndpointProducerBuilder create(String componentName) {
         HttpOutProperties properties = loader.load(HttpOutProperties.class, componentName);
-        return http(properties.getUrl());
+        EndpointProducerBuilder component =  http(properties.getUrl());
+        properties.getAdditional().forEach(component::doSetProperty);
+        return component;
     }
 
     @Override

@@ -1,5 +1,9 @@
 http-out:
   url: "earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson"
+  additional:
+    httpMethod: "GET"
+    firstProperty: 1
+    secondProp: "second"
 scheduler:
   delay-millis: "60000"
   thread-count: 1
