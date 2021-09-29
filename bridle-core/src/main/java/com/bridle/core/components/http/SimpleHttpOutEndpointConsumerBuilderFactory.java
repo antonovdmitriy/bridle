@@ -3,11 +3,6 @@ package com.bridle.core.components.http;
 import com.bridle.core.components.EndpointProducerBuilderFactory;
 import com.bridle.core.properties.PropertiesLoader;
 import org.apache.camel.builder.EndpointProducerBuilder;
-import org.springframework.boot.context.properties.bind.Binder;
-import org.springframework.context.ApplicationContext;
-
-import java.util.Map;
-import java.util.function.Consumer;
 
 import static org.apache.camel.builder.endpoint.StaticEndpointBuilders.http;
 
