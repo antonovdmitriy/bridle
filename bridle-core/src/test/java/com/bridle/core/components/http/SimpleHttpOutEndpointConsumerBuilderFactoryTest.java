@@ -2,7 +2,6 @@ package com.bridle.core.components.http;
 
 import com.bridle.core.properties.PropertiesLoader;
 import org.apache.camel.builder.EndpointProducerBuilder;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -43,9 +42,9 @@ class SimpleHttpOutEndpointConsumerBuilderFactoryTest {
                 SimpleHttpOutEndpointConsumerBuilderFactory.DEFAULT_CONFIG_PROPERTIES_KEY_HTTP_OUT))
                 .thenReturn(properties);
 
-        EndpointProducerBuilder value = httpOutFactory.create();
+        EndpointProducerBuilder httpOutProducerBuilder = httpOutFactory.create();
 
-        String uri = value.getUri();
+        String uri = httpOutProducerBuilder.getUri();
         verifyThatUriContainsAllAdditionalProperties(uri, properties);
         verifyThatUriContainsHostNameFromProperties(uri);
     }
@@ -55,9 +54,9 @@ class SimpleHttpOutEndpointConsumerBuilderFactoryTest {
         String componentName = "http-out";
         when(loader.load(HttpOutProperties.class, componentName)).thenReturn(properties);
 
-        EndpointProducerBuilder value = httpOutFactory.create(componentName);
+        EndpointProducerBuilder httpOutProducerBuilder = httpOutFactory.create(componentName);
 
-        String uri = value.getUri();
+        String uri = httpOutProducerBuilder.getUri();
         verifyThatUriContainsAllAdditionalProperties(uri, properties);
         verifyThatUriContainsHostNameFromProperties(uri);
     }
