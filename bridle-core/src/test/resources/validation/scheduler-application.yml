@@ -1,0 +1,5 @@
+scheduler:
+  delay-millis: "60000"
+  thread-count: 1
+http-out:
+  url: "localhost:8080"

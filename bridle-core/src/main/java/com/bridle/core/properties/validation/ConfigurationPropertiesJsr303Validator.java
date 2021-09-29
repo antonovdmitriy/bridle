@@ -10,30 +10,21 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
  * Because ConfigurationPropertiesJsr303Validator
  * in org.springframework.boot.context.properties is package private
  */
-public class ConfigurationPropertiesJsr303Validator implements Validator {
-
-    private final ConfigurationPropertiesJsr303Validator.Delegate delegate;
+public class ConfigurationPropertiesJsr303Validator extends LocalValidatorFactoryBean implements Validator {
 
     public ConfigurationPropertiesJsr303Validator(ApplicationContext applicationContext) {
-        this.delegate = new ConfigurationPropertiesJsr303Validator.Delegate(applicationContext);
+        setApplicationContext(applicationContext);
+        setMessageInterpolator(new MessageInterpolatorFactory().getObject());
+        afterPropertiesSet();
     }
 
     @Override
     public boolean supports(Class<?> type) {
-        return this.delegate.supports(type);
+        return super.supports(type);
     }
 
     @Override
     public void validate(Object target, Errors errors) {
-        this.delegate.validate(target, errors);
+        super.  validate(target, errors);
     }
-
-    private static class Delegate extends LocalValidatorFactoryBean {
-        Delegate(ApplicationContext applicationContext) {
-            setApplicationContext(applicationContext);
-            setMessageInterpolator(new MessageInterpolatorFactory().getObject());
-            afterPropertiesSet();
-        }
-    }
-
 }
