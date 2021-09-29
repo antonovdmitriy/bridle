@@ -3,6 +3,7 @@ package com.bridle.core.components.http;
 import com.bridle.core.properties.PropertiesLoader;
 import org.apache.camel.builder.EndpointProducerBuilder;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -24,7 +25,7 @@ class SimpleHttpOutEndpointConsumerBuilderFactoryTest {
     private PropertiesLoader loader;
     private HttpOutProperties properties;
 
-    @BeforeAll
+    @BeforeEach
     public void init() {
         initHttpOutProperties();
     }
