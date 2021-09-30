@@ -19,9 +19,19 @@ jobs:
         with:
           java-version: 11
           distribution: 'temurin'
-      - name: Maven Verify
-        run: mvn -B clean package
+      - name: SonarCloud Scan
+        run: mvn -B clean verify -Pcoverage,sonar -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Test Coverage
         uses: codecov/codecov-action@v2
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./target/site/jacoco-aggregate/jacoco.xml
+#          directory: target/site/jacoco-aggregate
+#       - name: SonarQube Quality Gate check
+#         uses: sonarsource/sonarqube-quality-gate-action@master
+#         # Force to fail step after specific time
+#         timeout-minutes: 5
+#         env:
+#           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
