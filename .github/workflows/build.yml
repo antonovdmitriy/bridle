@@ -28,7 +28,7 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ./jacoco.xml
-          directory: bridle-core/target/site/jacoco-aggregate/
+          directory: target/site/jacoco-aggregate
 #       - name: SonarQube Quality Gate check
 #         uses: sonarsource/sonarqube-quality-gate-action@master
 #         # Force to fail step after specific time
