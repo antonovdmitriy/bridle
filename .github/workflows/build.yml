@@ -27,7 +27,8 @@ jobs:
         uses: codecov/codecov-action@v2
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          files: ./bridle-core/target/site/jacoco-aggregate/jacoco.xml
+          files: ./jacoco.xml
+          directory: bridle-core/target/site/jacoco-aggregate/
 #       - name: SonarQube Quality Gate check
 #         uses: sonarsource/sonarqube-quality-gate-action@master
 #         # Force to fail step after specific time
