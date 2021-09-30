@@ -101,7 +101,7 @@
                 <sonar.projectKey>AntonovDmitriy_bridle</sonar.projectKey>
                 <sonar.moduleKey>${project.groupId}:${project.artifactId}</sonar.moduleKey>
                 <!--                <sonar.exclusions>${code.coverage.exclusions}</sonar.exclusions>-->
-                <sonar.report>${jacoco.reportDirectory}/jacoco.xml</sonar.report>
+                <sonar.report>target/site/jacoco-aggregate/jacoco.xml</sonar.report>
             </properties>
             <activation>
                 <activeByDefault>false</activeByDefault>

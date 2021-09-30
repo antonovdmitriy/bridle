@@ -27,8 +27,8 @@ jobs:
         uses: codecov/codecov-action@v2
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          files: ./jacoco.xml
-          directory: target/site/jacoco-aggregate
+          files: ./target/site/jacoco-aggregate/jacoco.xml
+#          directory: target/site/jacoco-aggregate
 #       - name: SonarQube Quality Gate check
 #         uses: sonarsource/sonarqube-quality-gate-action@master
 #         # Force to fail step after specific time
