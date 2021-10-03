@@ -27,7 +27,7 @@
         <repository>
             <id>github</id>
             <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/bridle</url>
+            <url>https://maven.pkg.github.com/AntonovDmitriy/bridle</url>
         </repository>
     </distributionManagement>
 
