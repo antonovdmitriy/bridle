@@ -23,6 +23,14 @@
         <jacoco.reportDirectory>${project.basedir}/../target/site/jacoco-aggregate</jacoco.reportDirectory>
     </properties>
 
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub Packages</name>
+            <url>https://maven.pkg.github.com/bridle</url>
+        </repository>
+    </distributionManagement>
+
     <build>
         <pluginManagement>
             <plugins>
