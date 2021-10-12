@@ -23,7 +23,7 @@
                 <repository>
                     <id>github</id>
                     <name>GitHub OWNER Apache Maven Packages</name>
-                    <url>https://maven.pkg.github.com/ANTONOVDMITRIY </url>
+                    <url>https://maven.pkg.github.com/antonovdmitriy/bridle </url>
                 </repository>
             </repositories>
         </profile>
