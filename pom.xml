@@ -7,7 +7,7 @@
     <groupId>com.bridle</groupId>
     <artifactId>bridle-parent</artifactId>
     <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.0.1-SNAPSHOT</version>
     <modules>
         <module>event-reader</module>
         <module>bridle-core</module>
@@ -27,7 +27,7 @@
         <repository>
             <id>github</id>
             <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/AntonovDmitriy/bridle</url>
+            <url>https://maven.pkg.github.com/antonovdmitriy/bridle</url>
         </repository>
     </distributionManagement>
 
