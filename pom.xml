@@ -9,7 +9,6 @@
     <packaging>pom</packaging>
     <version>0.0.1-SNAPSHOT</version>
     <modules>
-        <module>event-reader</module>
         <module>bridle-core</module>
     </modules>
 
