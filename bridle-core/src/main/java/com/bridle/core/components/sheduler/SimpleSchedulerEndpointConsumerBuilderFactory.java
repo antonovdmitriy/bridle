@@ -2,7 +2,6 @@ package com.bridle.core.components.sheduler;
 
 import com.bridle.core.properties.PropertiesLoader;
 import org.apache.camel.builder.EndpointConsumerBuilder;
-import org.apache.camel.builder.EndpointProducerBuilder;
 
 import java.util.Map;
 
