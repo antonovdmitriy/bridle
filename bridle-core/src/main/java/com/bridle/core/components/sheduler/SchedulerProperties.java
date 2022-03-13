@@ -1,8 +1,10 @@
 package com.bridle.core.components.sheduler;
 
+import com.bridle.core.properties.AbstractProperties;
+
 import javax.validation.constraints.Positive;
 
-public class SchedulerProperties {
+public class SchedulerProperties extends AbstractProperties {
     @Positive
     private int delayMillis;
     @Positive

@@ -1,21 +1,13 @@
 package com.bridle.core.components.http;
 
-import javax.validation.constraints.NotEmpty;
-import java.util.Map;
+import com.bridle.core.properties.AbstractProperties;
 
-public class HttpOutProperties {
+import javax.validation.constraints.NotEmpty;
+
+public class HttpOutProperties extends AbstractProperties {
 
     @NotEmpty
     private String url;
-    private Map<String, Object> additional;
-
-    public Map<String, Object> getAdditional() {
-        return additional;
-    }
-
-    public void setAdditional(Map<String, Object> additional) {
-        this.additional = additional;
-    }
 
     public String getUrl() {
         return url;

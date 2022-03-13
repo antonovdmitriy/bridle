@@ -19,7 +19,7 @@ import static org.mockito.Mockito.when;
 class SimpleHttpOutEndpointConsumerBuilderFactoryTest {
 
     @InjectMocks
-    private SimpleHttpOutEndpointConsumerBuilderFactory httpOutFactory;
+    private SimpleHttpOutEndpointProducerBuilderFactory httpOutFactory;
     @Mock
     private PropertiesLoader loader;
     private HttpOutProperties properties;
@@ -39,7 +39,7 @@ class SimpleHttpOutEndpointConsumerBuilderFactoryTest {
     @Test
     void createReturnsProducerBuilderWithLoadedPropertiesForDefaultComponentName() {
         when(loader.load(HttpOutProperties.class,
-                SimpleHttpOutEndpointConsumerBuilderFactory.DEFAULT_CONFIG_PROPERTIES_KEY_HTTP_OUT))
+                SimpleHttpOutEndpointProducerBuilderFactory.DEFAULT_CONFIG_PROPERTIES_KEY_HTTP_OUT))
                 .thenReturn(properties);
 
         EndpointProducerBuilder httpOutProducerBuilder = httpOutFactory.create();
