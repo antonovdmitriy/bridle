@@ -1,19 +1,15 @@
 package com.bridle.core.properties.validation;
 
 import com.bridle.core.components.http.HttpOutProperties;
-import com.bridle.core.components.http.SimpleHttpOutEndpointConsumerBuilderFactory;
+import com.bridle.core.components.http.SimpleHttpOutEndpointProducerBuilderFactory;
 import com.bridle.core.components.sheduler.SchedulerProperties;
 import com.bridle.core.components.sheduler.SimpleSchedulerEndpointConsumerBuilderFactory;
 import com.bridle.core.configuration.SimpleBridleConfiguration;
 import com.bridle.core.properties.PropertiesLoader;
-import com.bridle.core.routebuilder.BaseRouteBuilder;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.ContextConfiguration;
-import org.junit.jupiter.api.Test;
 import org.springframework.test.context.TestPropertySource;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -34,7 +30,7 @@ public class ConfigurationPropertiesJsr303ValidatorTest {
                 SimpleSchedulerEndpointConsumerBuilderFactory.DEFAULT_CONFIG_PROPERTIES_KEY_SCHEDULER);
         assertEquals(EXPECTED_INTEGER_VALUE, schedulerProperties.getThreadCount());
         HttpOutProperties httpOutProperties = propertiesLoader.load(HttpOutProperties.class,
-                SimpleHttpOutEndpointConsumerBuilderFactory.DEFAULT_CONFIG_PROPERTIES_KEY_HTTP_OUT);
+                SimpleHttpOutEndpointProducerBuilderFactory.DEFAULT_CONFIG_PROPERTIES_KEY_HTTP_OUT);
         assertEquals(EXPECTED_STRING_VALUE, httpOutProperties.getUrl());
     }
 }

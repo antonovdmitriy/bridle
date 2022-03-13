@@ -1,8 +1,10 @@
 package com.bridle.core.configuration;
 
-import com.bridle.core.components.EndpointConsumerBuilderFactory;
-import com.bridle.core.components.EndpointProducerBuilderFactory;
-import com.bridle.core.components.http.SimpleHttpOutEndpointConsumerBuilderFactory;
+import com.bridle.core.components.http.HttpOutFactory;
+import com.bridle.core.components.http.SimpleHttpOutEndpointProducerBuilderFactory;
+import com.bridle.core.components.kafka.KafkaOutFactory;
+import com.bridle.core.components.kafka.SimpleKafkaOutEndpointProducerBuilderFactory;
+import com.bridle.core.components.sheduler.SchedulerFactory;
 import com.bridle.core.components.sheduler.SimpleSchedulerEndpointConsumerBuilderFactory;
 import com.bridle.core.properties.DefaultPropertiesLoaderWIthJsr303Validation;
 import com.bridle.core.properties.PropertiesLoader;
@@ -35,13 +37,17 @@ public class SimpleBridleConfiguration {
     }
 
     @Bean
-    EndpointConsumerBuilderFactory schedulerFactory(PropertiesLoader propertiesLoaderService) {
+    SchedulerFactory schedulerFactory(PropertiesLoader propertiesLoaderService) {
         return new SimpleSchedulerEndpointConsumerBuilderFactory(propertiesLoaderService);
     }
 
     @Bean
-    EndpointProducerBuilderFactory httpOutFactory(PropertiesLoader propertiesLoaderService) {
-        return new SimpleHttpOutEndpointConsumerBuilderFactory(propertiesLoaderService);
+    HttpOutFactory httpOutFactory(PropertiesLoader propertiesLoaderService) {
+        return new SimpleHttpOutEndpointProducerBuilderFactory(propertiesLoaderService);
     }
 
+    @Bean
+    KafkaOutFactory kafkaOutFactory(PropertiesLoader propertiesLoaderService) {
+        return new SimpleKafkaOutEndpointProducerBuilderFactory(propertiesLoaderService);
+    }
 }
