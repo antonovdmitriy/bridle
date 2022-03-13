@@ -7,7 +7,7 @@
     <groupId>com.bridle</groupId>
     <artifactId>bridle-parent</artifactId>
     <packaging>pom</packaging>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <modules>
         <module>bridle-core</module>
     </modules>
