@@ -7,7 +7,7 @@
     <groupId>com.bridle</groupId>
     <artifactId>bridle-parent</artifactId>
     <packaging>pom</packaging>
-    <version>0.0.2</version>
+    <version>0.0.3</version>
     <modules>
         <module>bridle-core</module>
     </modules>
@@ -42,6 +42,11 @@
                     <groupId>org.sonarsource.scanner.maven</groupId>
                     <artifactId>sonar-maven-plugin</artifactId>
                     <version>${sonar.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>3.2.1</version>
                 </plugin>
             </plugins>
         </pluginManagement>
