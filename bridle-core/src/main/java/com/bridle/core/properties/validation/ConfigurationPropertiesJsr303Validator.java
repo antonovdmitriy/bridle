@@ -17,14 +17,4 @@ public class ConfigurationPropertiesJsr303Validator extends LocalValidatorFactor
         setMessageInterpolator(new MessageInterpolatorFactory().getObject());
         afterPropertiesSet();
     }
-
-    @Override
-    public boolean supports(Class<?> type) {
-        return super.supports(type);
-    }
-
-    @Override
-    public void validate(Object target, Errors errors) {
-        super.  validate(target, errors);
-    }
 }

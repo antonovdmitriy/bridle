@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 @ContextConfiguration(classes = {SimpleBridleConfiguration.class})
 @TestPropertySource(properties = {"spring.config.location=classpath:validation/scheduler-application.yml"})
-public class ConfigurationPropertiesJsr303ValidatorTest {
+class ConfigurationPropertiesJsr303ValidatorTest {
 
     private static final int EXPECTED_INTEGER_VALUE = 1;
     private static final String EXPECTED_STRING_VALUE = "localhost:8080";
@@ -25,7 +25,7 @@ public class ConfigurationPropertiesJsr303ValidatorTest {
     private PropertiesLoader propertiesLoader;
 
     @Test
-    public void propertiesLoaderSuccessLoadsPropertiesWithJsr303Validation() {
+    void propertiesLoaderSuccessLoadsPropertiesWithJsr303Validation() {
         SchedulerProperties schedulerProperties = propertiesLoader.load(SchedulerProperties.class,
                 SimpleSchedulerEndpointConsumerBuilderFactory.DEFAULT_CONFIG_PROPERTIES_KEY_SCHEDULER);
         assertEquals(EXPECTED_INTEGER_VALUE, schedulerProperties.getThreadCount());
