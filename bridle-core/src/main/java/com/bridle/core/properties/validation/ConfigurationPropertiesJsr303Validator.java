@@ -2,7 +2,6 @@ package com.bridle.core.properties.validation;
 
 import org.springframework.boot.validation.MessageInterpolatorFactory;
 import org.springframework.context.ApplicationContext;
-import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
@@ -16,15 +15,5 @@ public class ConfigurationPropertiesJsr303Validator extends LocalValidatorFactor
         setApplicationContext(applicationContext);
         setMessageInterpolator(new MessageInterpolatorFactory().getObject());
         afterPropertiesSet();
-    }
-
-    @Override
-    public boolean supports(Class<?> type) {
-        return super.supports(type);
-    }
-
-    @Override
-    public void validate(Object target, Errors errors) {
-        super.  validate(target, errors);
     }
 }

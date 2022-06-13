@@ -7,7 +7,7 @@
     <groupId>com.bridle</groupId>
     <artifactId>bridle-parent</artifactId>
     <packaging>pom</packaging>
-    <version>0.0.3</version>
+    <version>0.0.4</version>
     <modules>
         <module>bridle-core</module>
     </modules>
@@ -90,16 +90,6 @@
                                     <goal>report</goal>
                                 </goals>
                             </execution>
-                            <execution>
-                                <id>report-aggregate</id>
-                                <phase>verify</phase>
-                                <goals>
-                                    <goal>report-aggregate</goal>
-                                </goals>
-                                <configuration>
-                                    <outputDirectory>${project.basedir}/../target/site/jacoco-aggregate</outputDirectory>
-                                </configuration>
-                            </execution>
                         </executions>
                     </plugin>
                 </plugins>
@@ -112,8 +102,7 @@
                 <sonar.organization>antonovdmitriy</sonar.organization>
                 <sonar.projectKey>AntonovDmitriy_bridle</sonar.projectKey>
                 <sonar.moduleKey>${project.groupId}:${project.artifactId}</sonar.moduleKey>
-                <!--                <sonar.exclusions>${code.coverage.exclusions}</sonar.exclusions>-->
-                <sonar.report>target/site/jacoco-aggregate/jacoco.xml</sonar.report>
+                <sonar.report>bridle-core/target/site/jacoco/jacoco.xml</sonar.report>
             </properties>
             <activation>
                 <activeByDefault>false</activeByDefault>
