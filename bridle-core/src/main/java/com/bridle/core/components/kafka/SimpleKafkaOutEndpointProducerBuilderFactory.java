@@ -21,6 +21,7 @@ public class SimpleKafkaOutEndpointProducerBuilderFactory implements KafkaOutFac
         KafkaOutProperties properties = loader.load(KafkaOutProperties.class, componentName);
         EndpointProducerBuilder component = kafka(properties.getTopic())
                 .brokers(properties.getBrokers());
+
         Map<String, Object> additionalProperties = properties.getAdditional();
         if (additionalProperties != null && !additionalProperties.isEmpty()) {
             additionalProperties.forEach(component::doSetProperty);
