@@ -9,6 +9,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import static com.bridle.core.components.ComponentTestUtils.verifyThatUriContainsProperty;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
@@ -59,10 +60,6 @@ class SimpleSchedulerEndpointConsumerBuilderFactoryTest {
         String uri = schedulerBuilder.getUri();
         verifyThatUriContainsProperty(uri, "delay", EXPECTED_DELAY);
         verifyThatUriContainsProperty(uri, "poolSize", EXPECTED_THREAD_COUNT);
-    }
-
-    private void verifyThatUriContainsProperty(String uri, String property, Object value) {
-        assertTrue(() -> uri.contains(property + "=" + value));
     }
 
 }

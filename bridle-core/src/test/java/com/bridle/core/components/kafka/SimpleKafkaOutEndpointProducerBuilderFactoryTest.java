@@ -1,6 +1,5 @@
 package com.bridle.core.components.kafka;
 
-import com.bridle.core.components.http.HttpOutProperties;
 import com.bridle.core.properties.PropertiesLoader;
 import org.apache.camel.builder.EndpointProducerBuilder;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,14 +9,18 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Map;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static com.bridle.core.components.ComponentTestUtils.verifyThatUriContainsAllAdditionalProperties;
+import static com.bridle.core.components.ComponentTestUtils.verifyThatUriContainsProperty;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class SimpleKafkaOutEndpointProducerBuilderFactoryTest {
 
+    public static final String EXPECTED_BROKERS = "test:9090,test:9091";
     @InjectMocks
     private SimpleKafkaOutEndpointProducerBuilderFactory kafkaOutFactory;
     @Mock
@@ -31,10 +34,12 @@ class SimpleKafkaOutEndpointProducerBuilderFactoryTest {
 
     private void initKafkaOutProperties() {
         properties = new KafkaOutProperties();
-        properties.setBrokers("test:9090,test:9091");
+        properties.setBrokers(EXPECTED_BROKERS);
         properties.setTopic("test_topic");
-        properties.setAdditional(Map.of("propKeyFirst", "propValueFirst"));
-        properties.setAdditional(Map.of("propKeySecond", "propValueSecond"));
+        HashMap<String, Object> additionalProps = new HashMap<>();
+        additionalProps.put("propKeyFirst", "propValueFirst");
+        additionalProps.put("propKeySecond", "propValueSecond");
+        properties.setAdditional(additionalProps);
     }
 
     @Test
@@ -56,22 +61,14 @@ class SimpleKafkaOutEndpointProducerBuilderFactoryTest {
         when(loader.load(KafkaOutProperties.class, componentName)).thenReturn(properties);
 
         EndpointProducerBuilder kafkaOutProducerBuilder = kafkaOutFactory.create(componentName);
-
         String uri = kafkaOutProducerBuilder.getUri();
         verifyThatUriContainsAllAdditionalProperties(uri, properties);
         verifyThatUriContainsMandatoryProperties(uri);
     }
 
     private void verifyThatUriContainsMandatoryProperties(String uri) {
-//        assertTrue(() -> uri.startsWith("http://" + properties.getUrl()));
+        verifyThatUriContainsProperty(uri, "brokers",
+                URLEncoder.encode(EXPECTED_BROKERS, StandardCharsets.UTF_8));
     }
 
-    private void verifyThatUriContainsAllAdditionalProperties(String uri, KafkaOutProperties properties) {
-        assertAll(properties.getAdditional()
-                .entrySet()
-                .stream()
-                .map(entry -> () -> uri.contains(entry.getKey() + "=" + entry.getValue()))
-                //TODO: wrong test. No fact assertions. Fix in another properties test too!!!
-        );
-    }
 }

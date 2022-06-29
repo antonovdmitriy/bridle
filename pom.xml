@@ -10,6 +10,7 @@
     <version>0.0.4</version>
     <modules>
         <module>bridle-core</module>
+        <module>sample-http-kafka</module>
     </modules>
 
     <properties>

@@ -9,6 +9,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -32,8 +33,10 @@ class SimpleHttpOutEndpointConsumerBuilderFactoryTest {
     private void initHttpOutProperties() {
         properties = new HttpOutProperties();
         properties.setUrl("localhost:8093");
-        properties.setAdditional(Map.of("propKey", "myPropValue"));
-        properties.setAdditional(Map.of("myPropKey", "myPropValueSecond"));
+        HashMap<String, Object> additionalProps = new HashMap<>();
+        additionalProps.put("propKeyFirst", "propValueFirst");
+        additionalProps.put("propKeySecond", "propValueSecond");
+        properties.setAdditional(additionalProps);
     }
 
     @Test
@@ -66,10 +69,7 @@ class SimpleHttpOutEndpointConsumerBuilderFactoryTest {
     }
 
     private void verifyThatUriContainsAllAdditionalProperties(String uri, HttpOutProperties properties) {
-        assertAll(properties.getAdditional()
-                .entrySet()
-                .stream()
-                .map(entry -> () -> uri.contains(entry.getKey() + "=" + entry.getValue()))
-        );
+        properties.getAdditional()
+                .forEach((key, value) -> assertTrue(() -> uri.contains(key + "=" + value)));
     }
 }
