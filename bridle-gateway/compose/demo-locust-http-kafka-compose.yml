@@ -1,0 +1,118 @@
+version: '3'
+
+services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper:6.2.1
+    ports:
+      - '2181:2181'
+    environment:
+      - ZOOKEEPER_CLIENT_PORT=2181
+    networks:
+      - gateway-network
+
+  kafka:
+    image: confluentinc/cp-kafka:6.2.1
+    ports:
+      - '9092:9092'
+      - '19092:19092' # Внешний порт для доступа с хоста
+    environment:
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+      - KAFKA_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      - KAFKA_LISTENERS=PLAINTEXT://kafka:9092,PLAINTEXT_HOST://0.0.0.0:19092
+      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:19092
+      - KAFKA_AUTO_CREATE_TOPICS_ENABLE=false
+      - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1
+    depends_on:
+      - zookeeper
+    networks:
+      - gateway-network
+
+  kafka-topic:
+    image: confluentinc/cp-kafka:6.2.1
+    depends_on:
+      - kafka
+    command: >
+      bash -c "sleep 10 &&
+      kafka-topics --create --topic routetest --partitions 1 --replication-factor 1 --bootstrap-server kafka:9092"
+    restart: "no"
+    networks:
+      - gateway-network
+
+  gateway:
+    image: bridle-gateway:latest
+    build: ../.
+    ports:
+      - "8080:8080"
+    deploy:
+      resources:
+        limits:
+          memory: 512m
+          cpus: '1'
+    environment:
+      - SPRING_CONFIG=/app/config/application.yml
+    volumes:
+      - ./configs/http-kafka/application.yml:/app/config/application.yml
+      - ./configs/http-kafka/error.tmpl:/app/config/error.tmpl
+      - ./configs/http-kafka/success.tmpl:/app/config/success.tmpl
+      - ./configs/http-kafka/test.schema.json:/app/config/test.schema.json
+      - ./configs/http-kafka/validation-error-response.tmpl:/app/config/validation-error-response.tmpl
+      - ./configs/http-kafka/transform-with-headers.tmpl:/app/config/transform-with-headers.tmpl
+    depends_on:
+      - kafka-topic
+    networks:
+      - gateway-network
+
+  load-generator:
+    image: locustio/locust:latest
+    volumes:
+      - ./configs/load-locust-http:/mnt/locust
+    ports:
+      - "8089:8089"
+    command:
+      - -f
+      - /mnt/locust/locust.py
+      - --autostart
+      - --print-stats
+      - -u
+      - "${LOCUST_USERS:-5}"
+      - -r
+      - "${LOCUST_SPAWN_RATE:-1}"
+      - -H
+      - http://gateway:8080
+    depends_on:
+      - gateway
+    networks:
+      - gateway-network
+
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - '9090:9090'
+    volumes:
+      - ./configs/metrics/prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+    depends_on:
+      - gateway
+    networks:
+      - gateway-network
+
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - '3000:3000'
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./configs/metrics/grafana/datasources:/etc/grafana/provisioning/datasources
+      - ./configs/metrics/grafana/dashboards:/etc/grafana/provisioning/dashboards
+    depends_on:
+      - prometheus
+    networks:
+      - gateway-network
+
+volumes:
+  grafana_data: { }
+
+networks:
+  gateway-network:
